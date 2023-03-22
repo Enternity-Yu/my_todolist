@@ -1,14 +1,11 @@
 import React from 'react';
+import Home from './page/Home';
 import './App.css';
 
-type propsType = {
-  name: string;
-};
-const App: React.FC<propsType> = (props) => {
-	const { name } = props;
+const App: React.FC = () => {
 	return (
-		<div>
-			<h1>Hello {name}</h1>
+		<div className="App" data-testid="app-div-element">
+			<Home />
 		</div>
 	);
 };
