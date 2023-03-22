@@ -1,4 +1,6 @@
 import React from 'react';
+import './Home.scss';
+import AddTodo from './add/AddTodo';
 
 const Home = () => {
 	return (
@@ -7,6 +9,7 @@ const Home = () => {
 				<h1>Welcome To The Todo-List</h1>
 				<h3>Use this to manage your work and life, easily!</h3>
 			</div>
+			<AddTodo />
 		</div>
 	);
 };
