@@ -3,17 +3,18 @@ import './AddTodo.scss';
 
 const AddTodo: React.FC = () => {
 	const [inputVal, setInputVal] = useState<string>('');
-	const [isShowError, setIsShowError] = useState<boolean>(false);
+	const [isShowError, setIsShowError] = React.useState<boolean>(false);
 
 	const handleChangeInput = (event: ChangeEvent<HTMLInputElement>): void => {
 		setInputVal(event.target.value);
+		setIsShowError(false);
 	};
 
 	return (
 		<>
 			<div className="add" data-testid="add-todo-element">
 				<input
-					className={`add-input ${isShowError ? 'add-input-error' : null}`}
+					className="add-input"
 					value={inputVal}
 					type="text"
 					placeholder="Enter your todo item."
