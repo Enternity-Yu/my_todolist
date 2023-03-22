@@ -1,6 +1,6 @@
 import React from 'react';
-import './Home.scss';
 import AddTodo from './add/AddTodo';
+import './Home.scss';
 
 const Home = () => {
 	return (
