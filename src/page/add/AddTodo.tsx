@@ -8,11 +8,11 @@ const AddTodo: React.FC = () => {
 
 	return (
 		<>
-			<div className="add">
+			<div className="add" data-testid="add-todo-element">
 				<input
 					value={inputVal}
 					type="text"
-					placeholder="Enter your todo item"
+					placeholder="Enter your todo item."
 					onChange={handleChangeInput}
 				/>
 			</div>

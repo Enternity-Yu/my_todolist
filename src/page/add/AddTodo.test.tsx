@@ -9,6 +9,6 @@ describe('render AddTodo', () => {
 		const element = screen.getByRole(/textbox/i);
 
 		expect(element).toBeInTheDocument();
-		expect(element).toHaveAttribute('placeholder', 'Enter your todo item');
+		expect(element).toHaveAttribute('placeholder', 'Enter your todo item.');
 	});
 });
