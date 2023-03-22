@@ -1,9 +1,9 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Home from './Home';
 
 describe('render Home', () => {
-	beforeEach(() => render(<Home/>));
+	beforeEach(() => render(<Home />));
 
 	test('should show TodoList title correctly', () => {
 		const element = screen.getAllByRole('heading');
