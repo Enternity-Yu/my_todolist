@@ -1,0 +1,71 @@
+.add {
+  width: 600px;
+  margin: 30px auto 0;
+
+  .add-input {
+    padding: 0 0 0 1rem;
+    margin-right: 0.5rem;
+    width: 520px;
+    height: 40px;
+    font-size: 1rem;
+    font-style: normal;
+    color: #343A40;
+    border: 1px solid rgb(201, 200, 200);
+    border-radius: 3px;
+
+    &:focus {
+      outline: none;
+      border: 1px solid #7DCED5;
+    }
+  }
+
+  .add-input-error {
+    border: 1px solid red;
+  }
+
+  .error-hint {
+    float: bottom;
+    color: red;
+    display: none;
+  }
+
+  .error-hint-display {
+    display: block;
+  }
+
+  .add-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #7DCED5;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 1.6rem;
+    background-color: #7DCED5;
+    float: right;
+    padding: 0;
+  }
+}
+
+.select-task-tags {
+  margin: 5px auto;
+  width: fit-content;
+
+  .task-tag-item {
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    border-radius: 3px;
+    padding: 4px 8px;
+    margin: 5px;
+    text-align: center;
+    border: 0;
+    background-color: #DFFBFE;
+
+    cursor: default;
+  }
+
+  .task-tag-item-active {
+    background-color: #DFDFDF;
+  }
+}
+
