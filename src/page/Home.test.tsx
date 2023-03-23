@@ -1,11 +1,10 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Home from './Home';
 
 describe('render Home', () => {
-
 	it('should show TodoList title correctly', () => {
-		render(<Home/>);
+		render(<Home />);
 
 		const element = screen.getAllByRole('heading');
 
@@ -14,7 +13,7 @@ describe('render Home', () => {
 	});
 
 	it('should render Add-Todo component correctly', () => {
-		render(<Home/>);
+		render(<Home />);
 
 		const element = screen.getByTestId('add-todo-element');
 
@@ -22,7 +21,7 @@ describe('render Home', () => {
 	});
 
 	it('should render Task-List component correctly', () => {
-		render(<Home/>);
+		render(<Home />);
 
 		const element = screen.getByTestId('task-list-element');
 

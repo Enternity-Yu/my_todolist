@@ -10,9 +10,7 @@ const TaskList: React.FC = () => {
 		<div className="tasks-empty">
 			<img className="empty-img" src={EmptyImg} alt={'empty'} />
 			<div>
-				<i className="empty-text">
-          Go ahead and add a new task to your Todo-List!
-				</i>
+				<i className="empty-text"> Go ahead and add a new task to your Todo-List! </i>
 			</div>
 		</div>
 	);
@@ -35,14 +33,8 @@ const TaskList: React.FC = () => {
 						<th className="task-check-head"></th>
 						<th className="task-name-head">Task Name</th>
 						<th className="task-tags-head">Task Tags</th>
-						<th
-							className={`${
-								showValue === 'TO-DO'
-									? 'task-actions-head'
-									: 'task-actions-head-active'
-							}`}
-						>
-              Actions
+						<th className={`${showValue === 'TO-DO' ? 'task-actions-head' : 'task-actions-head-active'}`}>
+							Actions
 						</th>
 					</tr>
 				</thead>

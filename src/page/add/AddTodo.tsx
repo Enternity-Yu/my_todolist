@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { PlusOutlined } from '@ant-design/icons';
 import { ulid } from 'ulid';
 import { TagItemObj, TaskItemObj } from '../../type';
 import './AddTodo.scss';
@@ -86,21 +87,15 @@ const AddTodo: React.FC = () => {
 					onChange={handleChangeInput}
 				/>
 				<button className="add-btn" onClick={handleCreateTask}>
-					<i className="bi-plus-lg"></i>
+					<PlusOutlined />
 				</button>
-				<span
-					className={`error-hint ${isShowError ? 'error-hint-display' : null}`}
-				>
-					{errorMessage}
-				</span>
+				<span className={`error-hint ${isShowError ? 'error-hint-display' : null}`}>{errorMessage}</span>
 			</div>
 			<div className="select-task-tags">
 				{Object.keys(taskTags).map((tagItem) => (
 					<span
 						key={tagItem}
-						className={`task-tag-item ${
-							taskTags[tagItem] ? 'task-tag-item-active' : null
-						}`}
+						className={`task-tag-item ${taskTags[tagItem] ? 'task-tag-item-active' : null}`}
 						onClick={() => handleClickTaskTag(tagItem, taskTags[tagItem])}
 					>
 						{tagItem}
