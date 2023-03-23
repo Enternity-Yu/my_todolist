@@ -20,4 +20,12 @@ describe('render Home', () => {
 
 		expect(element).toBeInTheDocument();
 	});
+
+	it('should render Task-List component correctly', () => {
+		render(<Home/>);
+
+		const element = screen.getByTestId('task-list-element');
+
+		expect(element).toBeInTheDocument();
+	});
 });

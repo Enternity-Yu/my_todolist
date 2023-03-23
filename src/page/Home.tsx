@@ -1,6 +1,7 @@
 import React from 'react';
 import AddTodo from './add/AddTodo';
 import './Home.scss';
+import TaskList from './task-list/TaskList';
 
 const Home = () => {
 	return (
@@ -10,6 +11,7 @@ const Home = () => {
 				<h3>Use this to manage your work and life, easily!</h3>
 			</div>
 			<AddTodo />
+			<TaskList />
 		</div>
 	);
 };

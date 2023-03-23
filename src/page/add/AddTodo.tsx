@@ -76,8 +76,8 @@ const AddTodo: React.FC = () => {
 	};
 
 	return (
-		<>
-			<div className="add" data-testid="add-todo-element">
+		<div data-testid="add-todo-element">
+			<div className="add">
 				<input
 					className="add-input"
 					value={inputVal}
@@ -107,7 +107,7 @@ const AddTodo: React.FC = () => {
 					</span>
 				))}
 			</div>
-		</>
+		</div>
 	);
 };
 
