@@ -1,0 +1,57 @@
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table, th, td {
+	border: 1px solid rgb(201, 200, 200);
+}
+
+thead {
+	background-color: #EFF8FE;
+}
+
+.task-segmented {
+	width: 80%;
+	height: 30px;
+	margin: 20px auto;
+	font-weight: bold;
+}
+
+.task-list {
+	th, tr {
+		height: 40px;
+	}
+	
+	.task-check-head {
+		width: 40px;
+	}
+	
+	.task-tags-head {
+		width: 150px;
+	}
+	
+	.task-actions-head {
+		width: 150px;
+	}
+	
+	.task-actions-head-active {
+		display: none;
+	}
+}
+
+.tasks-empty {
+	width: 350px;
+	padding: 20px;
+	margin: auto;
+	
+	.empty-img {
+		text-align: center;
+		width: 300px;
+	}
+	
+	.empty-text {
+		color: #A9A9A9;
+		text-align: center;
+	}
+}

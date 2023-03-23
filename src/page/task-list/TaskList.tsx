@@ -1,25 +1,55 @@
-import React from 'react';
-import {Segmented} from 'antd';
+import React, { useState } from 'react';
+import { Segmented } from 'antd';
+import EmptyImg from '../../assets/empty-img.png';
+import './TaskList.scss';
 
 const TaskList: React.FC = () => {
-	return (<div data-testid="task-list-element">
-		<div>
-			<Segmented options={['TO-DO', 'Completed']} size='large' block={true}/>
-		</div>
-		<table className='task-list'>
-			<thead>
-				<tr>
-					<th></th>
-					<th>Task Name</th>
-					<th>Task Tags</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
+	const [showValue, setShowValue] = useState<string | number>('TO-DO');
 
-			</tbody>
-		</table>
-	</div>);
+	const showEmpty = (
+		<div className="tasks-empty">
+			<img className="empty-img" src={EmptyImg} alt={'empty'} />
+			<div>
+				<i className="empty-text">
+          Go ahead and add a new task to your Todo-List!
+				</i>
+			</div>
+		</div>
+	);
+
+	return (
+		<div data-testid="task-list-element">
+			<div className="task-segmented">
+				<Segmented
+					className="task-segmented-content"
+					options={['TO-DO', 'Completed']}
+					size="large"
+					block={true}
+					value={showValue}
+					onChange={setShowValue}
+				/>
+			</div>
+			<table className="task-list">
+				<thead>
+					<tr>
+						<th className="task-check-head"></th>
+						<th className="task-name-head">Task Name</th>
+						<th className="task-tags-head">Task Tags</th>
+						<th
+							className={`${
+								showValue === 'TO-DO'
+									? 'task-actions-head'
+									: 'task-actions-head-active'
+							}`}
+						>
+              Actions
+						</th>
+					</tr>
+				</thead>
+			</table>
+			{showEmpty}
+		</div>
+	);
 };
 
 export default TaskList;
