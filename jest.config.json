@@ -1,18 +1,8 @@
 {
-	"roots": [
-		"<rootDir>/src"
-	],
+	"rootDir": "",
 	"moduleNameMapper": {
-		"\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/config/jest/fileMock.js",
-		"^@assets(\/.*)$": "<rootDir>/app/assets$1",
-		"^@test(\/.*)$": "<rootDir>/app/test$1",
-		"^@utils(\/.*)$": "<rootDir>/app/src/utils$1",
-		"^@services(\/.*)$": "<rootDir>/app/src/services$1",
-		"^@context(\/.*)$": "<rootDir>/app/src/context$1",
-		"^@components(\/.*)$": "<rootDir>/app/src/components$1",
-		"^@config(\/.*)$": "<rootDir>/app/src/config$1",
-		"^antd/es/(.*)$": "antd/lib/$1",
-		"^lodash-es": "lodash"
+		"\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/fileMock.js",
+		"^@assets(\/.*)$": "<rootDir>/src/assets$1"
 	},
 	"transform": {
 		"\\.tsx?$": "babel-jest",
@@ -24,8 +14,8 @@
 	"coveragePathIgnorePatterns": [
 		"<rootDir>/node_modules/",
 		"<rootDir>/.jest/",
-		"<rootDir>/app/src/App.tsx",
-		"<rootDir>/app/src/index.tsx",
+		"<rootDir>/src/App.tsx",
+		"<rootDir>/src/index.tsx",
 		".eslintrc.json",
 		"jest.config.js"
 	]
