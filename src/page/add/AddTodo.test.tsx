@@ -12,7 +12,7 @@ describe('render AddTodo', () => {
 		addButtonElement = screen.getByRole(/button/i);
 	});
 
-	it('should render component successful', () => {
+	it('should render add-todo component successfully', () => {
 		expect(inputElement).toBeInTheDocument();
 		expect(addButtonElement).toBeInTheDocument();
 		expect(screen.getByText(/study/i)).toBeInTheDocument();
