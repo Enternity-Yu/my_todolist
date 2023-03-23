@@ -3,9 +3,9 @@ import { render, screen } from '@testing-library/react';
 import Home from './Home';
 
 describe('render Home', () => {
-	beforeEach(() => render(<Home />));
+	render(<Home />);
 
-	test('should show TodoList title correctly', () => {
+	it('should show TodoList title correctly', () => {
 		const element = screen.getAllByRole('heading');
 
 		expect(element[0]).toHaveTextContent('Welcome To The Todo-List');
@@ -14,7 +14,7 @@ describe('render Home', () => {
 		);
 	});
 
-	test('should render Add-Todo component correctly', () => {
+	it('should render Add-Todo component correctly', () => {
 		const element = screen.getByTestId('add-todo-element');
 
 		expect(element).toBeInTheDocument();
