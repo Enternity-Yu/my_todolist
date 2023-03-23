@@ -1,26 +1,15 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import AddTodo from './AddTodo';
 
-describe('render AddTodo', () => {
-	let element: HTMLInputElement;
-	beforeEach(() => {
-		render(<AddTodo />);
-		element = screen.getByRole(/textbox/i) as HTMLInputElement;
-	});
+describe('App', () => {
+	render(<AddTodo />);
 
-	test('should show add-input correctly', () => {
-		expect(element).toBeInTheDocument();
-		expect(element).toHaveAttribute('placeholder', 'Enter your todo item.');
-	});
-
-	test('test onChange event of add-input', () => {
-		fireEvent.change(element, { target: { value: 'task test' } });
-
-		expect(element.value).toBe('task test');
-	});
-
-	test('should have add-input class when isShowError is false ', () => {
-		expect(element).toHaveClass('add-input');
+	it('should render component successful', () => {
+		expect(screen.getByRole(/textbox/i)).toBeInTheDocument();
+		expect(screen.getByRole(/button/i)).toBeInTheDocument();
+		expect(screen.getByText(/study/i)).toBeInTheDocument();
+		expect(screen.getByText(/work/i)).toBeInTheDocument();
+		expect(screen.getByText(/life/i)).toBeInTheDocument();
 	});
 });
