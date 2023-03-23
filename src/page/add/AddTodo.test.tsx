@@ -15,14 +15,14 @@ describe('render AddTodo', () => {
 	it('should render add-todo component successfully', () => {
 		expect(inputElement).toBeInTheDocument();
 		expect(addButtonElement).toBeInTheDocument();
-		expect(screen.getByText(/study/i)).toBeInTheDocument();
-		expect(screen.getByText(/work/i)).toBeInTheDocument();
-		expect(screen.getByText(/life/i)).toBeInTheDocument();
+		expect(screen.getByText('study')).toBeInTheDocument();
+		expect(screen.getByText('work')).toBeInTheDocument();
+		expect(screen.getByText('life')).toBeInTheDocument();
 	});
 
 	it('should show error message if name is empty and tag is not empty when click add button', () => {
 		fireEvent.change(inputElement, { target: { value: ' ' } });
-		fireEvent.click(screen.getByText(/work/i));
+		fireEvent.click(screen.getByText('work'));
 		fireEvent.click(addButtonElement);
 
 		expect(screen.queryByText('Please enter the correct task content.')).toBeInTheDocument();
@@ -37,7 +37,7 @@ describe('render AddTodo', () => {
 
 	it('should not show error message if name and tag are not empty when click add button', () => {
 		fireEvent.change(inputElement, { target: { value: 'New todo item' } });
-		fireEvent.click(screen.getByText(/work/i));
+		fireEvent.click(screen.getByText('work'));
 		fireEvent.change(addButtonElement);
 
 		expect(screen.queryByText('Please enter the correct task content.')).not.toBeInTheDocument();

@@ -33,9 +33,7 @@ const TaskList: React.FC = () => {
 						<th className="task-check-head"></th>
 						<th className="task-name-head">Task Name</th>
 						<th className="task-tags-head">Task Tags</th>
-						<th className={`${showValue === 'TO-DO' ? 'task-actions-head' : 'task-actions-head-active'}`}>
-							Actions
-						</th>
+						{showValue === 'TO-DO' && <th className="task-actions-head">Actions</th>}
 					</tr>
 				</thead>
 			</table>

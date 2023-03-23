@@ -15,16 +15,12 @@ describe('render Home', () => {
 	it('should render Add-Todo component correctly', () => {
 		render(<Home />);
 
-		const element = screen.getByTestId('add-todo-element');
-
-		expect(element).toBeInTheDocument();
+		expect(screen.getByTestId('add-todo-element')).toBeInTheDocument();
 	});
 
 	it('should render Task-List component correctly', () => {
 		render(<Home />);
 
-		const element = screen.getByTestId('task-list-element');
-
-		expect(element).toBeInTheDocument();
+		expect(screen.getByTestId('task-list-element')).toBeInTheDocument();
 	});
 });
