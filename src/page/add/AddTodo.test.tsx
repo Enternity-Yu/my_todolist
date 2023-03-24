@@ -1,5 +1,6 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import AddTodo from './AddTodo';
 
 describe('render AddTodo', () => {
@@ -21,24 +22,29 @@ describe('render AddTodo', () => {
 	});
 
 	it('should show error message if name is empty and tag is not empty when click add button', () => {
-		fireEvent.change(inputElement, { target: { value: ' ' } });
-		fireEvent.click(screen.getByText('work'));
-		fireEvent.click(addButtonElement);
-
-		expect(screen.queryByText('Please enter the correct task content.')).toBeInTheDocument();
+		act(() => {
+			userEvent.type(inputElement, ' ');
+			userEvent.click(screen.getByText('work'));
+			userEvent.click(addButtonElement);
+		});
+		expect(screen.queryByText('Please enter the correct task content.') as HTMLElement).toBeInTheDocument();
 	});
 
 	it('should show error message if name is not empty and tag is empty when click add button', () => {
-		fireEvent.change(inputElement, { target: { value: 'New todo item' } });
-		fireEvent.click(addButtonElement);
+		act(() => {
+			userEvent.type(inputElement, 'New todo item');
+			userEvent.click(addButtonElement);
+		});
 
 		expect(screen.queryByText('Please select the task-tag.')).toBeInTheDocument();
 	});
 
 	it('should not show error message if name and tag are not empty when click add button', () => {
-		fireEvent.change(inputElement, { target: { value: 'New todo item' } });
-		fireEvent.click(screen.getByText('work'));
-		fireEvent.change(addButtonElement);
+		act(() => {
+			userEvent.click(screen.getByText('work'));
+			userEvent.type(inputElement, 'New todo item');
+			userEvent.click(addButtonElement);
+		});
 
 		expect(screen.queryByText('Please enter the correct task content.')).not.toBeInTheDocument();
 		expect(screen.queryByText('Please select the task-tag.')).not.toBeInTheDocument();

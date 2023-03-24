@@ -1,5 +1,6 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { act, render, screen } from '@testing-library/react';
 import TaskList from './TaskList';
 
 describe('render TaskList', () => {
@@ -18,7 +19,7 @@ describe('render TaskList', () => {
 	});
 
 	it('should have task-actions-head-active class when change Segmented', () => {
-		fireEvent.click(screen.getByText('Completed'));
+		act(() => userEvent.click(screen.getByText('Completed')));
 
 		expect(screen.queryByText('Actions')).not.toBeInTheDocument();
 	});
