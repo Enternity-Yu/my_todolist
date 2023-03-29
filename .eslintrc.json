@@ -26,7 +26,10 @@
 	"rules": {
 		"indent": [
 			"warn",
-			"tab"
+			"tab",
+			{
+				"SwitchCase": 1
+			}
 		],
 		"linebreak-style": [
 			"error",
@@ -48,7 +51,9 @@
 				"singleQuote": true,
 				"printWidth": 120,
 				"useTabs": true,
-				"semi": true
+				"semi": true,
+				"jsxBracketSameLine": true,
+				"endOfLine": "auto"
 			},
 			{
 				"usePrettierrc": false,
@@ -57,8 +62,6 @@
 				}
 			}
 		],
-		"no-console": "warn",
-		"no-unused-vars": "warn",
 		"@typescript-eslint/prefer-function-type": "warn",
 		"@typescript-eslint/no-explicit-any": "off",
 		"react-hooks/rules-of-hooks": "error",

@@ -20,8 +20,9 @@
 		[
 			"@babel/plugin-transform-runtime",
 			{
-				"useESModules": true,
-				"regenerator": false
+				"useESModules": false,
+				"regenerator": true,
+				"version": "7.0.0-beta.0"
 			}
 		]
 	],

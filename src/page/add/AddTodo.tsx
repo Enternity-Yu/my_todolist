@@ -1,10 +1,12 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { ulid } from 'ulid';
+import { TasksContext } from '../TasksContext';
 import { TagItemObj, TaskItemObj } from '../../type';
 import './AddTodo.scss';
 
 const AddTodo: React.FC = () => {
+	const { dispatch } = useContext(TasksContext);
 	const initTaskTags: TagItemObj = {
 		study: false,
 		work: false,
@@ -49,6 +51,8 @@ const AddTodo: React.FC = () => {
 			setErrorMessage('Please select the task-tag.');
 			return;
 		}
+
+		dispatch({ type: 'add', task: newTask });
 	};
 
 	const setNewTaskItemAndResetValue = (): void => {
@@ -80,13 +84,14 @@ const AddTodo: React.FC = () => {
 		<div data-testid="add-todo-element">
 			<div className="add">
 				<input
+					data-testid="add-input-element"
 					className="add-input"
 					value={inputVal}
 					type="text"
 					placeholder="Enter your todo item."
 					onChange={handleChangeInput}
 				/>
-				<button className="add-btn" onClick={handleCreateTask}>
+				<button className="add-btn" onClick={handleCreateTask} data-testid="add-button-element">
 					<PlusOutlined />
 				</button>
 				<span className={`error-hint ${isShowError ? 'error-hint-display' : null}`}>{errorMessage}</span>
@@ -96,8 +101,7 @@ const AddTodo: React.FC = () => {
 					<span
 						key={tagItem}
 						className={`task-tag-item ${taskTags[tagItem] ? 'task-tag-item-active' : null}`}
-						onClick={() => handleClickTaskTag(tagItem, taskTags[tagItem])}
-					>
+						onClick={() => handleClickTaskTag(tagItem, taskTags[tagItem])}>
 						{tagItem}
 					</span>
 				))}

@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Segmented } from 'antd';
+import { TaskItemObj } from '../../type';
+import TaskItem from '../task-item/TaskItem';
+import { TasksContext } from '../TasksContext';
 import EmptyImg from '../../assets/empty-img.png';
 import './TaskList.scss';
 
 const TaskList: React.FC = () => {
+	const { tasks: taskList } = useContext(TasksContext);
 	const [showValue, setShowValue] = useState<string | number>('TO-DO');
+
+	const taskListContent = taskList
+		.filter((taskItem: TaskItemObj) => {
+			return showValue === 'TO-DO' ? !taskItem?.isFinished : taskItem?.isFinished;
+		})
+		.map((taskItem: TaskItemObj, index: number) => (
+			<TaskItem key={index} taskItem={taskItem} showValue={showValue} />
+		));
 
 	const showEmpty = (
 		<div className="tasks-empty">
@@ -36,10 +48,11 @@ const TaskList: React.FC = () => {
 						{showValue === 'TO-DO' && <th className="task-actions-head">Actions</th>}
 					</tr>
 				</thead>
+				<tbody>{taskList.length === 0 ? null : taskListContent}</tbody>
 			</table>
-			{showEmpty}
+			{taskList.length === 0 ? showEmpty : null}
 		</div>
 	);
 };
-
+//
 export default TaskList;

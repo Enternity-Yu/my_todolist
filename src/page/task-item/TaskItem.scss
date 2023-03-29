@@ -1,0 +1,42 @@
+.task-checkbox {
+	width: 16px;
+	height: 16px;
+	display: flex;
+	align-items: center;
+	margin: auto;
+}
+
+.task-name-body {
+	padding: 0 10px;
+	max-width: 100px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	
+	.task-name-content {
+		max-width: 90%;
+		height: 30px;
+		color: #343A40;
+		font-size: 16px;
+		font-style: normal;
+	}
+}
+
+.task-tags-body {
+	width: 150px;
+	text-align: center;
+	
+	.task-tags {
+		padding: 0 6px;
+		margin: 0 3px;
+	}
+}
+
+.task-actions-body {
+	width: 150px;
+	text-align: center;
+}
+
+.task-actions-body-active {
+	display: none;
+}

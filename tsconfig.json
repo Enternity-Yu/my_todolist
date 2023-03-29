@@ -3,8 +3,7 @@
     "target": "es5",
     "lib": [
       "dom",
-      "dom.iterable",
-      "esnext"
+      "es6"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -24,6 +23,7 @@
   "include": [
     "src",
     "**/*.config.ts",
-    "babel.config.json"
+    "babel.config.json",
+    "setupTests.js"
   ]
 }
