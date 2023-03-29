@@ -48,11 +48,11 @@ const TaskList: React.FC = () => {
 						{showValue === 'TO-DO' && <th className="task-actions-head">Actions</th>}
 					</tr>
 				</thead>
-				<tbody>{taskList.length === 0 ? null : taskListContent}</tbody>
+				<tbody>{!taskList.length || taskListContent}</tbody>
 			</table>
-			{taskList.length === 0 ? showEmpty : null}
+			{!taskList.length && showEmpty}
 		</div>
 	);
 };
-//
+
 export default TaskList;

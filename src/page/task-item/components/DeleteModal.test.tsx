@@ -11,10 +11,10 @@ describe('DeleteModal', () => {
 
 		render(<DeleteModal visible={true} onCancel={onCancel} onOk={onOk} />);
 
-		expect(screen.getByText('Confirm Delete')).toBeInTheDocument();
-		expect(screen.getByText('Are you sure delete this task?')).toBeInTheDocument();
-		expect(screen.getByText('Yes')).toBeInTheDocument();
-		expect(screen.getByText('No')).toBeInTheDocument();
+		expect(screen.queryByText('Confirm Delete')).toBeInTheDocument();
+		expect(screen.queryByText('Are you sure delete this task?')).toBeInTheDocument();
+		expect(screen.queryByText('Yes')).toBeInTheDocument();
+		expect(screen.queryByText('No')).toBeInTheDocument();
 	});
 
 	test('should call onOk function when click Yes', async () => {

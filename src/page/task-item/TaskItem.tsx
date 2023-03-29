@@ -75,19 +75,21 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 					</Tag>
 				))}
 			</td>
-			<td className={`${showValue === 'TO-DO' ? 'task-actions-body' : 'task-actions-body-active'}`}>
-				<Space size="small">
-					{' '}
-					<Button onClick={handleOpenEditModal} size="small" data-testid="edit-button-element">
+			{showValue === 'TO-DO' && (
+				<td className="task-actions-body">
+					<Space size="small">
 						{' '}
-						Edit{' '}
-					</Button>{' '}
-					<Button onClick={handleOpenDeleteModal} size="small">
-						{' '}
-						Delete{' '}
-					</Button>{' '}
-				</Space>
-			</td>
+						<Button onClick={handleOpenEditModal} size="small" data-testid="edit-button-element">
+							{' '}
+							Edit{' '}
+						</Button>{' '}
+						<Button onClick={handleOpenDeleteModal} size="small">
+							{' '}
+							Delete{' '}
+						</Button>{' '}
+					</Space>
+				</td>
+			)}{' '}
 			<EditModal
 				visible={isShowEditModal}
 				onCancel={handleOffEditModal}

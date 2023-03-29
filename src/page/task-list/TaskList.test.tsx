@@ -26,11 +26,11 @@ describe('render TaskList', () => {
 					<TaskList />{' '}
 				</TasksContext.Provider>
 			);
-			expect(screen.getByText('TO-DO')).toBeInTheDocument();
-			expect(screen.getByText('Completed')).toBeInTheDocument();
-			expect(screen.getByText('Task Name')).toBeInTheDocument();
-			expect(screen.getByText('Task Tags')).toBeInTheDocument();
-			expect(screen.getByText('Actions')).toBeInTheDocument();
+			expect(screen.queryByText('TO-DO')).toBeInTheDocument();
+			expect(screen.queryByText('Completed')).toBeInTheDocument();
+			expect(screen.queryByText('Task Name')).toBeInTheDocument();
+			expect(screen.queryByText('Task Tags')).toBeInTheDocument();
+			expect(screen.queryByText('Actions')).toBeInTheDocument();
 		});
 
 		it('should have task-actions-head-active class when change Segmented', async () => {
@@ -94,7 +94,7 @@ describe('render TaskList', () => {
 			await waitFor(() => userEvent.click(screen.getByText('Cancel')));
 
 			await expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
-			await expect(screen.getByText('Todo item')).toBeInTheDocument();
+			await expect(screen.queryByText('Todo item')).toBeInTheDocument();
 		});
 
 		it('should show new task when click OK', async () => {

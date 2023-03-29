@@ -16,15 +16,11 @@ const EditModal: React.FC<middleProps> = (props: middleProps) => {
 	const [loading, setLoading] = useState(false);
 
 	const handleSave = async () => {
-		try {
-			const values = await form.validateFields();
-			setLoading(true);
-			await onSave(values);
-			setLoading(false);
-			onCancel();
-		} catch (error) {
-			console.error(error);
-		}
+		const values = await form.validateFields();
+		setLoading(true);
+		await onSave(values);
+		setLoading(false);
+		onCancel();
 	};
 
 	const handleCancel = () => {
@@ -51,7 +47,7 @@ const EditModal: React.FC<middleProps> = (props: middleProps) => {
 					name="name"
 					rules={[{ required: true, message: 'Please input task-name!' }]}>
 					{' '}
-					<Input data-testid="change-name-input" />
+					<Input data-testid="change-name-input" />{' '}
 				</Form.Item>{' '}
 			</Form>{' '}
 		</Modal>

@@ -26,9 +26,9 @@ describe('render AddTodo', () => {
 	it('should render add-todo component successfully', () => {
 		expect(inputElement).toBeInTheDocument();
 		expect(addButtonElement).toBeInTheDocument();
-		expect(screen.getByText('study')).toBeInTheDocument();
-		expect(screen.getByText('work')).toBeInTheDocument();
-		expect(screen.getByText('life')).toBeInTheDocument();
+		expect(screen.queryByText('study')).toBeInTheDocument();
+		expect(screen.queryByText('work')).toBeInTheDocument();
+		expect(screen.queryByText('life')).toBeInTheDocument();
 	});
 
 	it('should show error message if name is empty and tag is not empty when click add button', async () => {

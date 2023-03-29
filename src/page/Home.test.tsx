@@ -25,34 +25,11 @@ describe('Home', () => {
 			)
 		);
 
-		const title = screen.getAllByRole('heading');
-
-		expect(title[0]).toHaveTextContent('Welcome To The Todo-List');
-		expect(title[1]).toHaveTextContent('Use this to manage your work and life, easily!');
-	});
-
-	it('should render the AddTodo component correctly', async () => {
-		await waitFor(() =>
-			render(
-				<TasksContext.Provider value={mockValue}>
-					{' '}
-					<Home />{' '}
-				</TasksContext.Provider>
-			)
-		);
-
-		expect(screen.getByTestId('add-todo-element')).toBeInTheDocument();
-	});
-
-	it('should render the TaskList component correctly', async () => {
-		await waitFor(() =>
-			render(
-				<TasksContext.Provider value={mockValue}>
-					{' '}
-					<Home />{' '}
-				</TasksContext.Provider>
-			)
-		);
-		expect(screen.getByTestId('task-list-element')).toBeInTheDocument();
+		await waitFor(() => {
+			expect(screen.getByText('Welcome To The Todo-List')).toBeInTheDocument();
+			expect(screen.getByText('Use this to manage your work and life, easily!')).toBeInTheDocument();
+			expect(screen.getByTestId('add-todo-element')).toBeInTheDocument();
+			expect(screen.getByTestId('task-list-element')).toBeInTheDocument();
+		});
 	});
 });

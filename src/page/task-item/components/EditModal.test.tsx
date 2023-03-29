@@ -14,8 +14,8 @@ describe('EditModal', () => {
 
 		render(<EditModal visible={true} onCancel={onCancel} onSave={onSave} initialValue={initialValue} />);
 
-		expect(screen.getByText('Edit')).toBeInTheDocument();
-		expect(screen.getByText('TaskName')).toBeInTheDocument();
+		expect(screen.queryByText('Edit')).toBeInTheDocument();
+		expect(screen.queryByText('TaskName')).toBeInTheDocument();
 	});
 
 	test('should call onSave function when click OK', async () => {

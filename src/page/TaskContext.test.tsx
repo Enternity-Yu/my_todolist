@@ -96,4 +96,21 @@ describe('TaskContext', () => {
 
 		expect(tasksReducer(initialState, action)).toEqual(expectedState);
 	});
+
+	it('default', () => {
+		const initialState: TaskItemObj[] = [
+			{ id: '1', name: 'Task 1', tags: ['work'], isFinished: false },
+			{ id: '2', name: 'Task 2', tags: ['work'], isFinished: false },
+		];
+		const taskToUpdate = { id: '1' };
+		const action: ActionType = {
+			type: 'test',
+			id: taskToUpdate.id,
+			name: '',
+			task: { id: '', name: '', tags: [], isFinished: false },
+			isFinished: false,
+		};
+
+		expect(tasksReducer(initialState, action)).toEqual(initialState);
+	});
 });
