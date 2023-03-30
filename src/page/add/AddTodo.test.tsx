@@ -58,5 +58,6 @@ describe('render AddTodo', () => {
 
 		expect(screen.queryByText('Please enter the correct task content.')).not.toBeInTheDocument();
 		expect(screen.queryByText('Please select the task-tag.')).not.toBeInTheDocument();
+		expect(mockValue.dispatch).toHaveBeenCalled();
 	});
 });
