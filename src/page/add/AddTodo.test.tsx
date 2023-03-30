@@ -37,6 +37,7 @@ describe('render AddTodo', () => {
 			userEvent.click(screen.getByText('work'));
 			userEvent.click(addButtonElement);
 		});
+
 		expect(screen.queryByText('Please enter the correct task content.') as HTMLElement).toBeInTheDocument();
 	});
 

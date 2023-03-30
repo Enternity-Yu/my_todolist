@@ -25,11 +25,9 @@ describe('Home', () => {
 			)
 		);
 
-		await waitFor(() => {
-			expect(screen.getByText('Welcome To The Todo-List')).toBeInTheDocument();
-			expect(screen.getByText('Use this to manage your work and life, easily!')).toBeInTheDocument();
-			expect(screen.getByTestId('add-todo-element')).toBeInTheDocument();
-			expect(screen.getByTestId('task-list-element')).toBeInTheDocument();
-		});
+		expect(screen.getByText('Welcome To The Todo-List')).toBeInTheDocument();
+		expect(screen.getByText('Use this to manage your work and life, easily!')).toBeInTheDocument();
+		expect(screen.getByTestId('add-todo-element')).toBeInTheDocument();
+		expect(screen.getByTestId('task-list-element')).toBeInTheDocument();
 	});
 });

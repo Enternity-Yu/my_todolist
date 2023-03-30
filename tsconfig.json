@@ -24,6 +24,6 @@
     "src",
     "**/*.config.ts",
     "babel.config.json",
-    "setupTests.js"
+	  "src/setupTests.js"
   ]
 }
