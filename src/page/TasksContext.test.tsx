@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import { TasksProvider, tasksReducer } from './TasksContext';
 import { ActionType, TaskItemObj } from '../type';
 
-describe('TaskContext', () => {
+describe('TasksContext', () => {
 	it('renders TasksProvider component', () => {
 		render(
 			<TasksProvider>
-				<div>Test</div>
+				<div>Test</div>s
 			</TasksProvider>
 		);
 

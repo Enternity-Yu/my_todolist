@@ -94,7 +94,7 @@ const AddTodo: React.FC = () => {
 				<button className="add-btn" onClick={handleCreateTask} data-testid="add-button-element">
 					<PlusOutlined />
 				</button>
-				<span className={`error-hint ${isShowError ? 'error-hint-display' : null}`}>{errorMessage}</span>
+				{isShowError && <span className="error-hint">{errorMessage}</span>}
 			</div>
 			<div className="select-task-tags">
 				{Object.keys(taskTags).map((tagItem) => (
