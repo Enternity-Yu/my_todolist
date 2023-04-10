@@ -11,13 +11,19 @@ const TaskList: React.FC = () => {
 	// const { tasks: taskList } = useContext(TasksContext);
 	const [taskList, setTaskList] = useState([]);
 	useEffect(() => {
+		getAllTasks();
+	}, []);
+
+	const getAllTasks = () => {
 		getTasks().then((resp) => {
 			setTaskList(resp);
 		});
-	});
+	};
 
 	const [showValue, setShowValue] = useState<string | number>('TO-DO');
-
+	useEffect(() => {
+		console.log(34334);
+	}, [taskList]);
 	const taskListContent = taskList
 		.filter((taskItem: TaskItemObj) => {
 			return showValue === 'TO-DO' ? !taskItem?.isFinished : taskItem?.isFinished;

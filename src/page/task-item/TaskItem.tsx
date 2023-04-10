@@ -6,7 +6,7 @@ import EditModal from './components/EditModal';
 
 import './TaskItem.scss';
 import DeleteModal from './components/DeleteModal';
-import { deleteTask, updateTask } from '../../api/tasks';
+import { deleteTask, getTasks, updateTask } from '../../api/tasks';
 
 type middleProps = {
 	taskItem: TaskItemObj;
@@ -42,7 +42,7 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 		setIsShowEditModal(false);
 	};
 
-	const handleEditSave = async (values: EditFormValues) => {
+	const handleEditSave = async (values: EditFormValues): Promise<void> => {
 		await updateTask(taskItem.id, {
 			name: values.name,
 			tags: taskItem.tags,
@@ -79,7 +79,6 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 			</td>
 			<td className="task-name-body">
 				<Tooltip title={taskItem.name} placement={'topLeft'} overlayStyle={{ maxWidth: 600 }}>
-					{' '}
 					<span className="task-name-content">{taskItem?.name}</span>{' '}
 				</Tooltip>
 			</td>
@@ -95,16 +94,14 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 					<Space size="small">
 						{' '}
 						<Button onClick={handleOpenEditModal} size="small" data-testid="edit-button-element">
-							{' '}
-							Edit{' '}
-						</Button>{' '}
+							Edit
+						</Button>
 						<Button onClick={handleOpenDeleteModal} size="small">
-							{' '}
-							Delete{' '}
-						</Button>{' '}
+							Delete
+						</Button>
 					</Space>
 				</td>
-			)}{' '}
+			)}
 			{isShowEditModal && (
 				<EditModal
 					visible={isShowEditModal}
@@ -112,7 +109,7 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 					onSave={handleEditSave}
 					initialValue={taskItem}
 				/>
-			)}{' '}
+			)}
 			{isShowDeleteModal && (
 				<DeleteModal visible={isShowDeleteModal} onCancel={handleOffDeleteModal} onOk={handleDeleteOk} />
 			)}

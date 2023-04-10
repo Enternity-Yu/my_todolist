@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
 import { Modal, Form, Input } from 'antd';
 import { EditFormValues } from '../../../type';
@@ -24,14 +24,14 @@ const EditModal: React.FC<middleProps> = (props: middleProps) => {
 	};
 
 	const handleCancel = () => {
-		form.setFieldsValue(initialValue);
+		form.resetFields();
 		onCancel();
 	};
 
 	return (
 		<Modal
 			centered
-			destroyOnClose={true}
+			destroyOnClose
 			maskClosable={false}
 			closable={false}
 			open={visible}
@@ -39,17 +39,19 @@ const EditModal: React.FC<middleProps> = (props: middleProps) => {
 			onCancel={handleCancel}
 			onOk={handleSave}
 			confirmLoading={loading}>
-			{' '}
-			<Form form={form}>
-				{' '}
+			<Form form={form} initialValues={initialValue}>
 				<Form.Item
 					label="TaskName"
 					name="name"
 					rules={[{ required: true, message: 'Please input task-name!' }]}>
-					{' '}
-					<Input data-testid="change-name-input" />{' '}
-				</Form.Item>{' '}
-			</Form>{' '}
+					<Input
+						data-testid="change-name-input"
+						onChange={(e) => {
+							form.setFieldsValue({ username: e.target.value });
+						}}
+					/>
+				</Form.Item>
+			</Form>
 		</Modal>
 	);
 };
