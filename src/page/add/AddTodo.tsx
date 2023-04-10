@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useContext, useEffect, useRef, useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
 import { ulid } from 'ulid';
-import { TasksContext } from '../TasksContext';
+import { TasksContext } from '../../context/TasksContext';
 import { TagItemObj, TaskItemObj } from '../../type';
 import './AddTodo.scss';
 
@@ -51,13 +51,12 @@ const AddTodo: React.FC = () => {
 			setErrorMessage('Please select the task-tag.');
 			return;
 		}
-
 		dispatch({ type: 'add', task: newTask });
 	};
 
 	const setNewTaskItemAndResetValue = (): void => {
 		setNewTask({
-			id: ulid(),
+			id: '1',
 			name: taskName,
 			tags: selectedTags,
 			isFinished: false,

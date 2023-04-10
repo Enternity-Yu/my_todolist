@@ -1,7 +1,7 @@
 import React from 'react';
 import AddTodo from './add/AddTodo';
 import TaskList from './task-list/TaskList';
-import { TasksProvider } from './TasksContext';
+import { TasksProvider } from '../context/TasksContext';
 import './Home.scss';
 
 const Home = () => {

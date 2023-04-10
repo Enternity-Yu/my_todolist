@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import TaskList from './TaskList';
-import { TasksContext } from '../TasksContext';
+import { TasksContext } from '../../context/TasksContext';
 
 const mockTask = [
 	{

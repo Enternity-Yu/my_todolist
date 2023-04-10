@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Segmented } from 'antd';
 import { TaskItemObj } from '../../type';
 import TaskItem from '../task-item/TaskItem';
-import { TasksContext } from '../TasksContext';
+import { TasksContext } from '../../context/TasksContext';
 import EmptyImg from '../../assets/empty-img.png';
 import './TaskList.scss';
 

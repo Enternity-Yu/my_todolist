@@ -1,7 +1,7 @@
 import React from 'react';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { TasksContext } from '../TasksContext';
+import { TasksContext } from '../../context/TasksContext';
 import AddTodo from './AddTodo';
 
 describe('render AddTodo', () => {
@@ -59,6 +59,14 @@ describe('render AddTodo', () => {
 
 		expect(screen.queryByText('Please enter the correct task content.')).not.toBeInTheDocument();
 		expect(screen.queryByText('Please select the task-tag.')).not.toBeInTheDocument();
-		expect(mockValue.dispatch).toHaveBeenCalled();
+		expect(mockValue.dispatch).toHaveBeenCalledWith({
+			type: 'add',
+			task: {
+				id: '1',
+				name: 'New todo item',
+				tags: ['work'],
+				isFinished: false,
+			},
+		});
 	});
 });

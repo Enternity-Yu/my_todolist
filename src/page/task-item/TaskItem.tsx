@@ -1,12 +1,11 @@
 import React, { ChangeEvent, useContext, useState } from 'react';
-import { Button, Modal, Space, Tag, Tooltip } from 'antd';
+import { Button, Space, Tag, Tooltip } from 'antd';
 import { EditFormValues, TaskItemObj } from '../../type';
-import { TasksContext } from '../TasksContext';
+import { TasksContext } from '../../context/TasksContext';
 import EditModal from './components/EditModal';
 
 import './TaskItem.scss';
 import DeleteModal from './components/DeleteModal';
-import { ContactsOutlined } from '@ant-design/icons';
 
 type middleProps = {
 	taskItem: TaskItemObj;

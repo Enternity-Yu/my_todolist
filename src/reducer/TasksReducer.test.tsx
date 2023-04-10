@@ -1,19 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { TasksProvider, tasksReducer } from './TasksContext';
+import { tasksReducer } from './TasksReducer';
 import { ActionType, TaskItemObj } from '../type';
 
-describe('TasksContext', () => {
-	it('renders TasksProvider component', () => {
-		render(
-			<TasksProvider>
-				<div>Test</div>s
-			</TasksProvider>
-		);
-
-		expect(screen.getByText('Test')).toBeInTheDocument();
-	});
-
+describe('tasksReducer', () => {
 	it('adds a new task to the list', () => {
 		const initialState: TaskItemObj[] = [
 			{ id: '1', name: 'Task 1', tags: ['work'], isFinished: false },

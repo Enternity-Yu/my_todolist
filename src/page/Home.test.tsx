@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Home from './Home';
-import { TasksContext } from './TasksContext';
+import { TasksContext } from '../context/TasksContext';
 import { waitFor } from '@testing-library/dom';
 
 describe('Home', () => {
