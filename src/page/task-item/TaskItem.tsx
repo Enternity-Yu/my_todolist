@@ -64,6 +64,7 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 			</td>
 			<td className="task-name-body">
 				<Tooltip title={taskItem.name} placement={'topLeft'} overlayStyle={{ maxWidth: 600 }}>
+					{' '}
 					<span className="task-name-content">{taskItem?.name}</span>{' '}
 				</Tooltip>
 			</td>
@@ -89,13 +90,17 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 					</Space>
 				</td>
 			)}{' '}
-			<EditModal
-				visible={isShowEditModal}
-				onCancel={handleOffEditModal}
-				onSave={handleEditSave}
-				initialValue={taskItem}
-			/>{' '}
-			<DeleteModal visible={isShowDeleteModal} onCancel={handleOffDeleteModal} onOk={handleDeleteOk} />
+			{isShowEditModal && (
+				<EditModal
+					visible={isShowEditModal}
+					onCancel={handleOffEditModal}
+					onSave={handleEditSave}
+					initialValue={taskItem}
+				/>
+			)}{' '}
+			{isShowDeleteModal && (
+				<DeleteModal visible={isShowDeleteModal} onCancel={handleOffDeleteModal} onOk={handleDeleteOk} />
+			)}
 		</tr>
 	);
 };

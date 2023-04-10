@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { Modal, Form, Input } from 'antd';
 import { EditFormValues } from '../../../type';
@@ -40,7 +40,7 @@ const EditModal: React.FC<middleProps> = (props: middleProps) => {
 			onOk={handleSave}
 			confirmLoading={loading}>
 			{' '}
-			<Form form={form} initialValues={initialValue}>
+			<Form form={form}>
 				{' '}
 				<Form.Item
 					label="TaskName"
@@ -53,5 +53,4 @@ const EditModal: React.FC<middleProps> = (props: middleProps) => {
 		</Modal>
 	);
 };
-
 export default EditModal;
