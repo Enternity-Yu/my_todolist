@@ -1,19 +1,28 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Segmented } from 'antd';
 import { TaskItemObj } from '../../type';
 import TaskItem from '../task-item/TaskItem';
 import { TasksContext } from '../../context/TasksContext';
 import EmptyImg from '../../assets/empty-img.png';
 import './TaskList.scss';
+import { getTasks } from '../../api/tasks';
 
 const TaskList: React.FC = () => {
-	const { tasks: taskList } = useContext(TasksContext);
+	// const { tasks: taskList } = useContext(TasksContext);
+	const [taskList, setTaskList] = useState([]);
+	useEffect(() => {
+		getTasks().then((resp) => {
+			setTaskList(resp);
+		});
+	});
+
 	const [showValue, setShowValue] = useState<string | number>('TO-DO');
 
 	const taskListContent = taskList
 		.filter((taskItem: TaskItemObj) => {
 			return showValue === 'TO-DO' ? !taskItem?.isFinished : taskItem?.isFinished;
 		})
+		.reverse()
 		.map((taskItem: TaskItemObj, index: number) => (
 			<TaskItem key={index} taskItem={taskItem} showValue={showValue} />
 		));

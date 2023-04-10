@@ -2,8 +2,9 @@ import React, { ChangeEvent, useContext, useEffect, useRef, useState } from 'rea
 import { PlusOutlined } from '@ant-design/icons';
 import { ulid } from 'ulid';
 import { TasksContext } from '../../context/TasksContext';
-import { TagItemObj, TaskItemObj } from '../../type';
+import { NewTaskObj, TagItemObj, TaskItemObj } from '../../type';
 import './AddTodo.scss';
+import { createTask } from '../../api/tasks';
 
 const AddTodo: React.FC = () => {
 	const { dispatch } = useContext(TasksContext);
@@ -17,7 +18,7 @@ const AddTodo: React.FC = () => {
 	const [taskName, setTaskName] = useState<string>('');
 	const [taskTags, setTaskTags] = useState<TagItemObj>({ ...initTaskTags });
 	const [selectedTags, setSelectedTags] = useState<string[]>(['']);
-	const [newTask, setNewTask] = useState<TaskItemObj>();
+	const [newTask, setNewTask] = useState<NewTaskObj>();
 	const [isShowError, setIsShowError] = useState<boolean>(false);
 	const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -40,7 +41,7 @@ const AddTodo: React.FC = () => {
 		createNewTaskToList();
 	}, [newTask]);
 
-	const createNewTaskToList = (): void => {
+	const createNewTaskToList = async (): Promise<void> => {
 		if (!newTask?.name) {
 			setIsShowError(true);
 			setErrorMessage('Please enter the correct task content.');
@@ -51,15 +52,14 @@ const AddTodo: React.FC = () => {
 			setErrorMessage('Please select the task-tag.');
 			return;
 		}
-		dispatch({ type: 'add', task: newTask });
+		// dispatch({ type: 'add', task: newTask });
+		await createTask(newTask);
 	};
 
 	const setNewTaskItemAndResetValue = (): void => {
 		setNewTask({
-			id: '1',
 			name: taskName,
 			tags: selectedTags,
-			isFinished: false,
 		});
 		setInputVal('');
 		setTaskTags(initTaskTags);

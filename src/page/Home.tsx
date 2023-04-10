@@ -13,7 +13,7 @@ const Home = () => {
 					<h3>Use this to manage your work and life, easily!</h3>
 				</div>
 				<AddTodo /> <TaskList />
-			</div>{' '}
+			</div>
 		</TasksProvider>
 	);
 };

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useState } from 'react';
+import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { Button, Space, Tag, Tooltip } from 'antd';
 import { EditFormValues, TaskItemObj } from '../../type';
 import { TasksContext } from '../../context/TasksContext';
@@ -6,6 +6,7 @@ import EditModal from './components/EditModal';
 
 import './TaskItem.scss';
 import DeleteModal from './components/DeleteModal';
+import { deleteTask, updateTask } from '../../api/tasks';
 
 type middleProps = {
 	taskItem: TaskItemObj;
@@ -18,12 +19,19 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 	const [isShowEditModal, setIsShowEditModal] = useState(false);
 	const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
 
-	const handleChangeTaskStatus = (taskItemId: string, event: ChangeEvent<HTMLInputElement>): void => {
-		dispatch({
-			type: 'check',
-			id: taskItemId,
+	const tagsArr = taskItem.tags.split(',');
+
+	const handleChangeTaskStatus = async (taskItemId: number, event: ChangeEvent<HTMLInputElement>): Promise<void> => {
+		await updateTask(taskItemId, {
+			name: taskItem.name,
+			tags: taskItem.tags,
 			isFinished: event.target.checked,
 		});
+		// dispatch({
+		// 	type: 'check',
+		// 	id: taskItemId,
+		// 	isFinished: event.target.checked,
+		// });
 	};
 
 	const handleOpenEditModal = () => {
@@ -35,7 +43,12 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 	};
 
 	const handleEditSave = async (values: EditFormValues) => {
-		dispatch({ type: 'update', id: taskItem.id, name: values.name });
+		await updateTask(taskItem.id, {
+			name: values.name,
+			tags: taskItem.tags,
+			isFinished: taskItem.isFinished,
+		});
+		// dispatch({ type: 'update', id: taskItem.id, name: values.name });
 	};
 
 	const handleOpenDeleteModal = () => {
@@ -46,8 +59,10 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 		setIsShowDeleteModal(false);
 	};
 	const handleDeleteOk = () => {
-		dispatch({ type: 'delete', id: taskItem.id });
-		handleOffDeleteModal();
+		deleteTask(taskItem.id).then(() => {
+			handleOffDeleteModal();
+		});
+		// dispatch({ type: 'delete', id: taskItem.id });
 	};
 
 	return (
@@ -69,7 +84,7 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 				</Tooltip>
 			</td>
 			<td className="task-tags-body">
-				{taskItem?.tags.map((tagItem: string, index: number) => (
+				{tagsArr?.map((tagItem: string, index: number) => (
 					<Tag className="task-tags" color="cyan" key={index}>
 						{tagItem}
 					</Tag>

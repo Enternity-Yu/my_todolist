@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createTask, getTasks } from './tasks';
+import { createTask, deleteTask, getTasks, updateTask } from './tasks';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -114,11 +114,33 @@ describe('#tasks', () => {
 
 	describe('#deleteTask', () => {
 		it('should return new task when the server response status is 200', async () => {
-			// expect().toBe();
+			mockedAxios.delete.mockResolvedValue({
+				status: 200,
+				data: {},
+			});
+
+			expect(await deleteTask(1)).toStrictEqual(expect.objectContaining({}));
 		});
 
 		it('should return error message when the server response status is not 200', async () => {
-			// expect().toBe();
+			mockedAxios.delete.mockRejectedValueOnce({
+				response: {
+					data: {
+						code: 404,
+						message: 'error',
+					},
+				},
+			});
+			await expect(deleteTask(1)).rejects.toEqual(
+				expect.objectContaining({
+					response: {
+						data: {
+							code: 404,
+							message: 'error',
+						},
+					},
+				})
+			);
 		});
 	});
 });

@@ -1,8 +1,13 @@
 export type TaskItemObj = {
-	id: string;
+	id: number;
+	name: string;
+	tags: any;
+	isFinished: boolean;
+};
+
+export type NewTaskObj = {
 	name: string;
 	tags: string[];
-	isFinished: boolean;
 };
 
 export type TagItemObj = {
@@ -11,8 +16,8 @@ export type TagItemObj = {
 
 export type ActionType = {
 	type: string;
-	task: TaskItemObj;
-	id: string;
+	task: any;
+	id: number;
 	name: string;
 	isFinished: boolean;
 };

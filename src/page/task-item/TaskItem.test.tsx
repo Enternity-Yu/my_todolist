@@ -4,7 +4,7 @@ import TaskItem from './TaskItem';
 
 describe('render TaskItem', () => {
 	const mockTaskItem = {
-		id: '001',
+		id: 1,
 		name: 'Todo item',
 		tags: ['work'],
 		isFinished: false,
