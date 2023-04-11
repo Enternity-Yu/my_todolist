@@ -1,19 +1,15 @@
 import axios from 'axios';
+const url = 'http://localhost:8080/tasks';
 
 export const getTasks = () => {
-	return axios
-		.get('http://localhost:8080/tasks')
-		.then((resp) => {
-			return resp.data;
-		})
-		.catch((error) => {
-			return Promise.reject(error);
-		});
+	return axios.get(url).then((resp) => {
+		return resp.data;
+	});
 };
 
 export const createTask = (requestBody: any) => {
 	return axios
-		.post('http://localhost:8080/tasks', requestBody)
+		.post(url, requestBody)
 		.then((resp) => {
 			return resp.data;
 		})

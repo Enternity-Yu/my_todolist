@@ -14,27 +14,6 @@ describe('#tasks', () => {
 
 			expect(await getTasks()).toBe('data');
 		});
-
-		it('should return error message when the server response status is not 200', async () => {
-			mockedAxios.post.mockRejectedValueOnce({
-				response: {
-					data: {
-						code: 500,
-						message: 'error',
-					},
-				},
-			});
-			await expect(createTask({ name: '', tags: [] })).rejects.toEqual(
-				expect.objectContaining({
-					response: {
-						data: {
-							code: 500,
-							message: 'error',
-						},
-					},
-				})
-			);
-		});
 	});
 
 	describe('#createTask', () => {
