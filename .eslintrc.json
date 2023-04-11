@@ -16,12 +16,12 @@
 		"project": "./tsconfig.json"
 	},
 	"plugins": [
-    "react-hooks",
+		"react-hooks",
 		"@typescript-eslint"
 	],
 	"rules": {
-    "prettier/prettier": [
-			"error",
+		"prettier/prettier": [
+			"warn",
 			{
 				"editor.formatOnSave": true,
 				"tabWidth": 4,

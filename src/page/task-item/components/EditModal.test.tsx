@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 const onCancel = jest.fn();
 const onSave = jest.fn();
 const initialValue = { name: 'Test Task' };
+
 describe('EditModal', () => {
 	beforeEach(() =>
 		render(<EditModal visible={true} onCancel={onCancel} onSave={onSave} initialValue={initialValue} />)

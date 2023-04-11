@@ -1,26 +1,17 @@
 import React from 'react';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { TasksContext } from '../../context/TasksContext';
 import AddTodo from './AddTodo';
 
+const createNewTask = jest.fn();
 describe('render AddTodo', () => {
 	let inputElement: HTMLInputElement;
 	let addButtonElement: HTMLButtonElement;
-	const mockValue = {
-		tasks: [],
-		dispatch: jest.fn(),
-	};
 
 	beforeEach(() => {
-		render(
-			<TasksContext.Provider value={mockValue}>
-				{' '}
-				<AddTodo />){' '}
-			</TasksContext.Provider>
-		);
-		inputElement = screen.getByRole(/textbox/i);
-		addButtonElement = screen.getByRole(/button/i);
+		render(<AddTodo createTask={createNewTask} />);
+		inputElement = screen.getByRole('textbox');
+		addButtonElement = screen.getByRole('button');
 	});
 
 	it('should render add-todo component successfully', () => {
@@ -33,7 +24,6 @@ describe('render AddTodo', () => {
 
 	it('should show error message if name is empty and tag is not empty when click add button', async () => {
 		await act(() => {
-			userEvent.type(inputElement, ' ');
 			userEvent.click(screen.getByText('work'));
 			userEvent.click(addButtonElement);
 		});
@@ -59,14 +49,9 @@ describe('render AddTodo', () => {
 
 		expect(screen.queryByText('Please enter the correct task content.')).not.toBeInTheDocument();
 		expect(screen.queryByText('Please select the task-tag.')).not.toBeInTheDocument();
-		expect(mockValue.dispatch).toHaveBeenCalledWith({
-			type: 'add',
-			task: {
-				id: '1',
-				name: 'New todo item',
-				tags: ['work'],
-				isFinished: false,
-			},
+		expect(createNewTask).toHaveBeenCalledWith({
+			name: 'New todo item',
+			tags: ['work'],
 		});
 	});
 });

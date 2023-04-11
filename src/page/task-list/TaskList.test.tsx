@@ -2,29 +2,25 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { act, render, screen, waitFor } from '@testing-library/react';
 import TaskList from './TaskList';
-import { TasksContext } from '../../context/TasksContext';
+
+let update: any;
+let remove: any;
 
 const mockTask = [
 	{
-		id: '001',
+		id: 1,
 		name: 'Todo item',
-		tags: ['work'],
+		tags: 'work',
 		isFinished: false,
 	},
 ];
-const mockValue = {
-	tasks: mockTask,
-	dispatch: jest.fn(),
-};
+
 describe('render TaskList', () => {
-	beforeEach(() =>
-		render(
-			<TasksContext.Provider value={mockValue}>
-				{' '}
-				<TaskList />{' '}
-			</TasksContext.Provider>
-		)
-	);
+	beforeEach(() => {
+		update = jest.fn();
+		remove = jest.fn();
+		render(<TaskList taskList={mockTask} updateTask={update} deleteTask={remove} />);
+	});
 
 	describe('show taskList', () => {
 		it('should render task-list component successfully', () => {
@@ -47,9 +43,9 @@ describe('render TaskList', () => {
 			await userEvent.click(screen.getByTestId('task-item-checkbox'));
 
 			await waitFor(() =>
-				expect(mockValue.dispatch).toHaveBeenCalledWith({
-					type: 'check',
-					id: mockValue.tasks[0].id,
+				expect(update).toHaveBeenCalledWith(mockTask[0].id, {
+					name: mockTask[0].name,
+					tags: mockTask[0].tags,
 					isFinished: true,
 				})
 			);
@@ -73,10 +69,17 @@ describe('render TaskList', () => {
 
 		it('should show new task when click OK', async () => {
 			await waitFor(() => userEvent.click(screen.getByText('Edit')));
+			await waitFor(() => userEvent.clear(screen.getByTestId('change-name-input')));
 			await waitFor(() => userEvent.type(screen.getByTestId('change-name-input'), 'Updated Task'));
 			await waitFor(() => userEvent.click(screen.getByText('OK')));
 
-			await waitFor(() => expect(mockValue.dispatch).toHaveBeenCalled());
+			await waitFor(() =>
+				expect(update).toHaveBeenCalledWith(mockTask[0].id, {
+					name: 'Updated Task',
+					tags: mockTask[0].tags,
+					isFinished: mockTask[0].isFinished,
+				})
+			);
 			await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
 		});
 	});
@@ -99,12 +102,7 @@ describe('render TaskList', () => {
 			await userEvent.click(screen.getByText('Delete'));
 			await waitFor(() => userEvent.click(screen.getByText('Yes')));
 
-			await waitFor(() =>
-				expect(mockValue.dispatch).toHaveBeenCalledWith({
-					type: 'delete',
-					id: mockValue.tasks[0].id,
-				})
-			);
+			await waitFor(() => expect(remove).toHaveBeenCalledWith(mockTask[0].id));
 			await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
 		});
 	});

@@ -3,7 +3,6 @@ import '@testing-library/jest-dom/';
 import { render, screen, waitFor } from '@testing-library/react';
 import DeleteModal from './DeleteModal';
 import userEvent from '@testing-library/user-event';
-import { log } from 'util';
 
 const onCancel = jest.fn();
 const onOk = jest.fn();

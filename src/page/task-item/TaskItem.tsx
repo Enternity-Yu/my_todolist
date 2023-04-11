@@ -1,45 +1,31 @@
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Button, Space, Tag, Tooltip } from 'antd';
 import { EditFormValues, TaskItemObj } from '../../type';
-import { TasksContext } from '../../context/TasksContext';
 import EditModal from './components/EditModal';
-
-import './TaskItem.scss';
 import DeleteModal from './components/DeleteModal';
-import { deleteTask, getTasks, updateTask } from '../../api/tasks';
+import './TaskItem.scss';
 
 type middleProps = {
 	taskItem: TaskItemObj;
 	showValue: string | number;
+	updateTask: (id: number, data: any) => void;
+	deleteTask: (id: number) => void;
 };
 
-const TaskItem: React.FC<middleProps> = (props: middleProps) => {
-	const { taskItem, showValue } = props;
-	const { dispatch } = useContext(TasksContext);
+const TaskItem: React.FC<middleProps> = (props) => {
+	const { taskItem, showValue, updateTask, deleteTask } = props;
+
 	const [isShowEditModal, setIsShowEditModal] = useState(false);
 	const [isShowDeleteModal, setIsShowDeleteModal] = useState(false);
 
 	const tagsArr = taskItem.tags.split(',');
 
 	const handleChangeTaskStatus = async (taskItemId: number, event: ChangeEvent<HTMLInputElement>): Promise<void> => {
-		await updateTask(taskItemId, {
-			name: taskItem.name,
-			tags: taskItem.tags,
-			isFinished: event.target.checked,
-		});
-		// dispatch({
-		// 	type: 'check',
-		// 	id: taskItemId,
-		// 	isFinished: event.target.checked,
-		// });
+		await updateTask(taskItemId, { name: taskItem.name, tags: taskItem.tags, isFinished: event.target.checked });
 	};
 
-	const handleOpenEditModal = () => {
-		setIsShowEditModal(true);
-	};
-
-	const handleOffEditModal = () => {
-		setIsShowEditModal(false);
+	const handleEditModal = (isShow: boolean) => {
+		setIsShowEditModal(isShow);
 	};
 
 	const handleEditSave = async (values: EditFormValues): Promise<void> => {
@@ -48,21 +34,15 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 			tags: taskItem.tags,
 			isFinished: taskItem.isFinished,
 		});
-		// dispatch({ type: 'update', id: taskItem.id, name: values.name });
 	};
 
-	const handleOpenDeleteModal = () => {
-		setIsShowDeleteModal(true);
+	const handleDeleteModal = (isShow: boolean) => {
+		setIsShowDeleteModal(isShow);
 	};
 
-	const handleOffDeleteModal = () => {
-		setIsShowDeleteModal(false);
-	};
-	const handleDeleteOk = () => {
-		deleteTask(taskItem.id).then(() => {
-			handleOffDeleteModal();
-		});
-		// dispatch({ type: 'delete', id: taskItem.id });
+	const handleDeleteOk = async () => {
+		await deleteTask(taskItem.id);
+		handleDeleteModal(false);
 	};
 
 	return (
@@ -93,10 +73,10 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 				<td className="task-actions-body">
 					<Space size="small">
 						{' '}
-						<Button onClick={handleOpenEditModal} size="small" data-testid="edit-button-element">
+						<Button onClick={() => handleEditModal(true)} size="small" data-testid="edit-button-element">
 							Edit
 						</Button>
-						<Button onClick={handleOpenDeleteModal} size="small">
+						<Button onClick={() => handleDeleteModal(true)} size="small">
 							Delete
 						</Button>
 					</Space>
@@ -105,13 +85,17 @@ const TaskItem: React.FC<middleProps> = (props: middleProps) => {
 			{isShowEditModal && (
 				<EditModal
 					visible={isShowEditModal}
-					onCancel={handleOffEditModal}
+					onCancel={() => handleEditModal(false)}
 					onSave={handleEditSave}
 					initialValue={taskItem}
 				/>
 			)}
 			{isShowDeleteModal && (
-				<DeleteModal visible={isShowDeleteModal} onCancel={handleOffDeleteModal} onOk={handleDeleteOk} />
+				<DeleteModal
+					visible={isShowDeleteModal}
+					onCancel={() => handleDeleteModal(false)}
+					onOk={handleDeleteOk}
+				/>
 			)}
 		</tr>
 	);
