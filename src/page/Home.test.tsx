@@ -1,18 +1,17 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import Home from './Home';
 import { getTasks, createTask, updateTask, deleteTask } from '../api/tasks';
+import userEvent from '@testing-library/user-event';
 
-jest.mock('../api/tasks', () => ({
-	getTasks: jest.fn(() => Promise.resolve([{ id: 1, name: 'mockName', tags: 'mockTag', isFinished: false }])),
-	createTask: jest.fn(),
-	updateTask: jest.fn(),
-	deleteTask: jest.fn(),
-}));
-const getAllTasks = jest.fn(() => getTasks());
+jest.mock('../api/tasks');
+(getTasks as jest.Mock).mockResolvedValue([{ id: 1, name: 'test', tags: 'test', isFinished: false }]);
 
 describe('Home', () => {
-	beforeEach(() => render(<Home />));
+	beforeEach(() => {
+		render(<Home />);
+	});
+
 	it('should render the title and subtitle correctly', async () => {
 		expect(screen.getByText('Welcome To The Todo-List')).toBeInTheDocument();
 		expect(screen.getByText('Use this to manage your work and life, easily!')).toBeInTheDocument();
@@ -20,49 +19,35 @@ describe('Home', () => {
 		expect(screen.getByTestId('task-list-element')).toBeInTheDocument();
 	});
 
-	it('calls getTasks API function', async () => {
-		await getAllTasks();
-
-		expect(getTasks).toHaveBeenCalled();
+	it('should get taskList when render Home', () => {
+		expect(getTasks).toBeCalled();
 	});
 
-	it('calls createTask API function and calls getAllTasks', async () => {
-		const data = { name: 'New Task', tags: ['test'] };
-		const createNewTask = jest.fn((data) => {
-			createTask(data);
-			getAllTasks();
-		});
+	it('calls createTask API function', async () => {
+		const data = { name: 'New Task', tags: ['work'] };
 
-		await createNewTask(data);
+		await waitFor(() => userEvent.click(screen.getByText('work')));
+		await waitFor(() => userEvent.type(screen.getByRole('textbox'), 'New Task'));
+		await waitFor(() => userEvent.click(screen.getByRole('button')));
 
 		expect(createTask).toHaveBeenCalledWith(data);
-		expect(getAllTasks).toHaveBeenCalled;
 	});
 
-	it('calls updateTask API function and calls getAllTasks', async () => {
+	it('calls updateTask API function', async () => {
 		const id = 1;
-		const data = { name: 'Task 1 Updated', tags: ['update'], isFinished: true };
-		const update = jest.fn((id, data) => {
-			updateTask(id, data);
-			getAllTasks();
-		});
+		const data = { name: 'test', tags: 'test', isFinished: true };
 
-		await update(id, data);
+		await waitFor(() => userEvent.click(screen.getByTestId('task-item-checkbox')));
 
 		expect(updateTask).toHaveBeenCalledWith(id, data);
-		expect(getAllTasks).toHaveBeenCalled;
 	});
 
-	it('calls deleteTask API function and calls getAllTasks', async () => {
-		const id = 1;
-		const remove = jest.fn((id) => {
-			deleteTask(id);
-			getAllTasks();
-		});
+	it('calls deleteTask API function', async () => {
+		await waitFor(() => userEvent.click(screen.getByText('Delete')));
+		await waitFor(() => userEvent.click(screen.getByText('Yes')));
 
-		await remove(id);
-
-		expect(deleteTask).toHaveBeenCalledWith(id);
-		expect(getAllTasks).toHaveBeenCalled();
+		expect(deleteTask).toHaveBeenCalledWith(1);
 	});
 });
+
+//https://kentcdodds.com/blog/replace-axios-with-a-simple-custom-fetch-wrapper

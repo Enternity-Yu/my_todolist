@@ -1,34 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import AddTodo from './add/AddTodo';
 import TaskList from './task-list/TaskList';
 import { createTask, deleteTask, getTasks, updateTask } from '../api/tasks';
 import './Home.scss';
 
-const Home = () => {
+const Home: React.FC = () => {
 	const [taskList, setTaskList] = useState([]);
-	useEffect(() => {
-		getAllTasks();
-	}, []);
+	const [loading, setLoading] = useState(false);
 
-	const getAllTasks = () => {
-		getTasks().then((resp) => {
-			setTaskList(resp);
-		});
+	const getAllTasks = async () => {
+		const res = await getTasks();
+		setTaskList(res);
 	};
+
 	const createNewTask = async (data: any) => {
+		setLoading(true);
 		await createTask(data);
-		await getAllTasks();
+		setLoading(false);
 	};
 
 	const update = async (id: number, data: any) => {
+		setLoading(true);
 		await updateTask(id, data);
-		await getAllTasks();
+		setLoading(false);
 	};
 
 	const remove = async (id: number) => {
+		setLoading(true);
 		await deleteTask(id);
-		await getAllTasks();
+		setLoading(false);
 	};
+
+	useEffect(() => {
+		if (!loading) getAllTasks().then();
+	}, [loading]);
 
 	return (
 		<div className="home" data-testid="home-element">
@@ -36,7 +41,7 @@ const Home = () => {
 				<h1>Welcome To The Todo-List</h1>
 				<h3>Use this to manage your work and life, easily!</h3>
 			</div>
-			<AddTodo createTask={createNewTask} />
+			<AddTodo createTask={createNewTask} />{' '}
 			<TaskList taskList={taskList} updateTask={update} deleteTask={remove} />
 		</div>
 	);
