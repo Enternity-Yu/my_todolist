@@ -1,83 +1,83 @@
 {
-	"name": "my_todolist",
-	"version": "0.1.0",
-	"private": true,
-	"jest": {
-		"verbose": true
-	},
-	"dependencies": {
-		"@ant-design/icons": "^5.0.1",
-		"@testing-library/dom": "^9.2.0",
-		"@testing-library/jest-dom": "^5.16.5",
-		"@testing-library/react": "^13.4.0",
-		"@testing-library/user-event": "^13.5.0",
-		"@types/lodash": "^4.14.191",
-		"@types/node": "^14.18.41",
-		"@types/react": "^18.0.28",
-		"@types/react-dom": "^18.0.11",
-		"antd": "^5.3.2",
-		"axios": "^0.27.0",
-		"lodash": "^4.17.21",
-		"react": "^18.2.0",
-		"react-dom": "^18.2.0",
-		"react-scripts": "5.0.1",
-		"sass": "^1.59.3",
-		"ulid": "^2.3.0",
-		"web-vitals": "^2.1.4"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "jest  --transformIgnorePatterns \\\"node_modules/(?!axios)/\\\"",
-		"eject": "react-scripts eject",
-		"coverage": "jest --coverage"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
-	"devDependencies": {
-		"@babel/core": "^7.15.0",
-		"@babel/plugin-syntax-jsx": "^7.2.0",
-		"@babel/plugin-transform-runtime": "^7.21.0",
-		"@babel/preset-env": "^7.20.2",
-		"@babel/preset-typescript": "^7.1.0",
-		"@babel/runtime": "^7.21.0",
-		"@babel/runtime-corejs3": "7.21.0",
-		"@types/jest": "^29.5.0",
-		"@types/testing-library__jest-dom": "^5.14.5",
-		"@typescript-eslint/eslint-plugin": "^5.6.0",
-		"@typescript-eslint/parser": "^5.6.0",
-		"babel-jest": "^29.5.0",
-		"eslint": "^8.36.0",
-		"eslint-config-prettier": "^8.7.0",
-		"eslint-config-standard-with-typescript": "^34.0.1",
-		"eslint-plugin-import": "^2.27.5",
-		"eslint-plugin-n": "^15.6.1",
-		"eslint-plugin-prettier": "^4.2.1",
-		"eslint-plugin-promise": "^6.1.1",
-		"eslint-plugin-react": "^7.32.2",
-		"jest": "26.5.3",
-		"jest-cli": "^29.5.0",
-		"jest-environment-jsdom": "^26.6.2",
-		"jest-transform-stub": "^2.0.0",
-		"prettier": "^2.8.5",
-		"ts-jest": "26.5.3",
-		"ts-node": "^8.9.1",
-		"typescript": "^4.9.3"
-	}
+  "name": "my_todolist",
+  "version": "0.1.0",
+  "private": true,
+  "jest": {
+    "verbose": true
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@testing-library/dom": "^9.2.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^14.18.41",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "antd": "^5.3.2",
+    "axios": "^0.27.0",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "sass": "^1.59.3",
+    "ulid": "^2.3.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest  ",
+    "eject": "react-scripts eject",
+    "coverage": "jest --coverage"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/plugin-syntax-jsx": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.1.0",
+    "@babel/runtime": "^7.21.0",
+    "@babel/runtime-corejs3": "7.21.0",
+    "@types/jest": "^29.5.0",
+    "@types/testing-library__jest-dom": "^5.14.5",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "babel-jest": "^29.5.0",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "jest": "26.5.3",
+    "jest-cli": "^29.5.0",
+    "jest-environment-jsdom": "^26.6.2",
+    "jest-transform-stub": "^2.0.0",
+    "prettier": "^2.8.5",
+    "ts-jest": "26.5.3",
+    "ts-node": "^8.9.1",
+    "typescript": "^4.9.3"
+  }
 }
