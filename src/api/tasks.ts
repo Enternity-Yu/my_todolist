@@ -22,7 +22,7 @@ export const createTask = (requestBody: requestDataType) => {
 
 export const updateTask = (taskId: number, requestBody: requestDataType) => {
 	return axios
-		.put(`url/${taskId}`, requestBody)
+		.put(`${url}/${taskId}`, requestBody)
 		.then((resp) => {
 			return resp.data;
 		})
@@ -33,7 +33,7 @@ export const updateTask = (taskId: number, requestBody: requestDataType) => {
 
 export const deleteTask = (taskId: number) => {
 	return axios
-		.delete(`url/${taskId}`)
+		.delete(`${url}/${taskId}`)
 		.then((resp) => {
 			return resp.data;
 		})
