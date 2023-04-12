@@ -41,7 +41,7 @@ const Home: React.FC = () => {
 				<h1>Welcome To The Todo-List</h1>
 				<h3>Use this to manage your work and life, easily!</h3>
 			</div>
-			<AddTodo createTask={createNewTask} />{' '}
+			<AddTodo />
 			<TaskList taskList={taskList} updateTask={update} deleteTask={remove} />
 		</div>
 	);
