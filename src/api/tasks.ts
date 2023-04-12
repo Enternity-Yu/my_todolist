@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { requestDataType } from '../type';
+
 const url = 'http://localhost:8080/tasks';
 
 export const getTasks = () => {
@@ -7,7 +9,7 @@ export const getTasks = () => {
 	});
 };
 
-export const createTask = (requestBody: any) => {
+export const createTask = (requestBody: requestDataType) => {
 	return axios
 		.post(url, requestBody)
 		.then((resp) => {
@@ -18,9 +20,9 @@ export const createTask = (requestBody: any) => {
 		});
 };
 
-export const updateTask = (taskId: number, requestBody: any) => {
+export const updateTask = (taskId: number, requestBody: requestDataType) => {
 	return axios
-		.put(`http://localhost:8080/tasks/${taskId}`, requestBody)
+		.put(`url/${taskId}`, requestBody)
 		.then((resp) => {
 			return resp.data;
 		})
@@ -31,7 +33,7 @@ export const updateTask = (taskId: number, requestBody: any) => {
 
 export const deleteTask = (taskId: number) => {
 	return axios
-		.delete(`http://localhost:8080/tasks/${taskId}`)
+		.delete(`url/${taskId}`)
 		.then((resp) => {
 			return resp.data;
 		})

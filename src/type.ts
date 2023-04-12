@@ -25,3 +25,9 @@ export type ActionType = {
 export type EditFormValues = {
 	name: string;
 };
+
+export type requestDataType = {
+	name: string;
+	tags: string[];
+	isFinished?: boolean;
+};
