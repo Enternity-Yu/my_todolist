@@ -72,7 +72,6 @@ const TaskItem: React.FC<middleProps> = (props) => {
 			{showValue === 'TO-DO' && (
 				<td className="task-actions-body">
 					<Space size="small">
-						{' '}
 						<Button onClick={() => handleEditModal(true)} size="small" data-testid="edit-button-element">
 							Edit
 						</Button>

@@ -5,6 +5,7 @@ jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('#tasks', () => {
+	afterEach(() => jest.clearAllMocks());
 	describe('#getTasks', () => {
 		it('should return tasks when the server response status is 200', async () => {
 			mockedAxios.get.mockResolvedValue({
@@ -23,34 +24,57 @@ describe('#tasks', () => {
 			tags: ['test'],
 			isFinished: false,
 		};
+
 		it('should return new task when the server response status is 200', async () => {
 			mockedAxios.post.mockResolvedValue({
 				status: 200,
 				data: taskData,
 			});
 
-			expect(await createTask({ name: 'test', tags: ['test'] })).toStrictEqual(expect.objectContaining(taskData));
+			expect(await createTask({ name: 'test', tags: ['test'] })).toEqual({ isCreated: true, data: taskData });
 		});
 
-		it('should return error message when the server response status is not 200', async () => {
+		it('should return new task when the server response status is not 200', async () => {
+			mockedAxios.post.mockResolvedValue({
+				status: 203,
+				data: taskData,
+			});
+
+			expect(await createTask({ name: 'test', tags: ['test'] })).toEqual({ isCreated: false });
+		});
+
+		it('should return error message when the server response status is 400', async () => {
 			mockedAxios.post.mockRejectedValueOnce({
 				response: {
 					data: {
-						code: 404,
+						statusCode: 400,
 						message: 'error',
 					},
 				},
 			});
-			await expect(createTask({ name: '', tags: [] })).rejects.toEqual(
-				expect.objectContaining({
-					response: {
-						data: {
-							code: 404,
-							message: 'error',
-						},
+			await expect(await createTask({ name: '', tags: [] })).toEqual({
+				statusCode: 400,
+				message: 'error',
+			});
+		});
+
+		it('should return error when the server response status is not 400', async () => {
+			mockedAxios.post.mockRejectedValueOnce({
+				response: {
+					data: {
+						code: 123,
+						message: 'error',
 					},
-				})
-			);
+				},
+			});
+			await expect(createTask({ name: '', tags: [] })).rejects.toEqual({
+				response: {
+					data: {
+						code: 123,
+						message: 'error',
+					},
+				},
+			});
 		});
 	});
 
@@ -73,14 +97,55 @@ describe('#tasks', () => {
 					tags: ['updateTag'],
 					isFinished: true,
 				})
-			).toStrictEqual(expect.objectContaining(updateData));
+			).toEqual({
+				isUpdated: true,
+				data: updateData,
+			});
 		});
 
-		it('should return error message when the server response status is not 200', async () => {
+		it('should return new task when the server response status is 200', async () => {
+			mockedAxios.put.mockResolvedValue({
+				status: 203,
+				data: updateData,
+			});
+
+			expect(
+				await updateTask(1, {
+					name: 'updateName',
+					tags: ['updateTag'],
+					isFinished: true,
+				})
+			).toEqual({
+				isUpdated: false,
+			});
+		});
+
+		it('should return error message when the server response status is 404', async () => {
 			mockedAxios.put.mockRejectedValueOnce({
 				response: {
 					data: {
-						code: 404,
+						statusCode: 404,
+						message: 'error',
+					},
+				},
+			});
+			await expect(
+				await updateTask(1, {
+					name: 'updateName',
+					tags: ['updateTag'],
+					isFinished: true,
+				})
+			).toEqual({
+				statusCode: 404,
+				message: 'error',
+			});
+		});
+
+		it('should return error when the server response status is not 404', async () => {
+			mockedAxios.put.mockRejectedValueOnce({
+				response: {
+					data: {
+						code: 123,
 						message: 'error',
 					},
 				},
@@ -91,16 +156,14 @@ describe('#tasks', () => {
 					tags: ['updateTag'],
 					isFinished: true,
 				})
-			).rejects.toEqual(
-				expect.objectContaining({
-					response: {
-						data: {
-							code: 404,
-							message: 'error',
-						},
+			).rejects.toEqual({
+				response: {
+					data: {
+						code: 123,
+						message: 'error',
 					},
-				})
-			);
+				},
+			});
 		});
 	});
 
@@ -111,28 +174,50 @@ describe('#tasks', () => {
 				data: {},
 			});
 
-			expect(await deleteTask(1)).toStrictEqual(expect.objectContaining({}));
+			expect(await deleteTask(1)).toEqual({ isDeleted: true, data: {} });
 		});
 
-		it('should return error message when the server response status is not 200', async () => {
-			mockedAxios.delete.mockRejectedValueOnce({
+		it('should return new task when the server response status is 200', async () => {
+			mockedAxios.delete.mockResolvedValue({
+				status: 203,
+				data: {},
+			});
+
+			expect(await deleteTask(1)).toEqual({ isDeleted: false });
+		});
+
+		it('should return error message when the server response status is 404', async () => {
+			mockedAxios.delete.mockRejectedValue({
 				response: {
 					data: {
-						code: 404,
+						statusCode: 404,
 						message: 'error',
 					},
 				},
 			});
-			await expect(deleteTask(1)).rejects.toEqual(
-				expect.objectContaining({
-					response: {
-						data: {
-							code: 404,
-							message: 'error',
-						},
+			await expect(await deleteTask(1)).toEqual({
+				statusCode: 404,
+				message: 'error',
+			});
+		});
+
+		it('should return error when the server response status is not 404', async () => {
+			mockedAxios.delete.mockRejectedValueOnce({
+				response: {
+					data: {
+						code: 123,
+						message: 'error',
 					},
-				})
-			);
+				},
+			});
+			await expect(deleteTask(1)).rejects.toEqual({
+				response: {
+					data: {
+						code: 123,
+						message: 'error',
+					},
+				},
+			});
 		});
 	});
 });
