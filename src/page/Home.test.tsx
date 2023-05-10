@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Home from './Home';
 import { getTasks, createTask, updateTask, deleteTask } from '../api/tasks';
 import userEvent from '@testing-library/user-event';
@@ -13,7 +13,7 @@ describe('Home', () => {
 	});
 
 	it('should render the title and subtitle correctly', async () => {
-		expect(screen.getByText('Welcome To The Todo-List')).toBeInTheDocument();
+		expect(screen.getByText('llllllllllll To The Todo-List')).toBeInTheDocument();
 		expect(screen.getByText('Use this to manage your work and life, easily!')).toBeInTheDocument();
 		expect(screen.getByTestId('add-todo-element')).toBeInTheDocument();
 		expect(screen.getByTestId('task-list-element')).toBeInTheDocument();
