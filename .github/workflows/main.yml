@@ -1,0 +1,26 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main # 只在 main 分支上推送代码时运行工作流
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest # 在 Ubuntu 操作系统上运行工作流
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2 # 使用官方的 checkout 动作，拉取代码
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2 # 使用官方的 Node.js 设置动作，安装 Node.js
+
+    - name: Install dependencies
+      run: npm install # 安装项目依赖项
+
+    - name: Build project
+      run: npm run build # 构建项目
+
+    - name: Run tests
+      run: npm test # 运行测试
