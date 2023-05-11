@@ -29,6 +29,6 @@ jobs:
         if: failure()
         run: |
           MESSAGE=":x: Build failed on branch \`$GITHUB_REF\` by \`$GITHUB_USER\`"
-          ERROR="$(tail -n 1 /home/runner/work/my-repo/my-repo/npm-debug.log)"
+          ERROR="$(tail -n 1 /home/runner/work/my_todolist/my_todolist/npm-debug.log)"
           echo "$MESSAGE\n\n$ERROR" | tee /dev/tty | mail -s "$MESSAGE" 1159348642@qq.com
 
