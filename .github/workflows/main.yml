@@ -27,15 +27,14 @@ jobs:
         run: npm test # 运行测试
 
       - name: Build and Push Docker Image
-        run:
-          set +x
-          ../../ci/gen-image.sh
+        run: ../../ci/gen-image.sh
       #        uses: mr-smithers-excellent/docker-build-push@v4
       #        with:
       #          image: siyustarla/todolist-frontend
       #          registry: docker.io
       #          username: ${{ secrets.DOCKER_USERNAME }}
       #          password: ${{ secrets.DOCKER_PASSWORD }}
+      #          tags: siyustarla/todolist-frontend:$(date +%Y-%m-%d-%H-%M-%S)
 
 
       - name: Send notification on success
