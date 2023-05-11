@@ -19,7 +19,7 @@ REMOTE_TAG = $username/$LOCAL_TAG
 #podman rmi $REMOTE_TAG
 
 podman login -u $username -p $password
-podman build -t $LOCAL_TAG -f ../Dockerfile .
+podman build -t $REMOTE_TAG  -f ../Dockerfile .
 podman push $REMOTE_TAG
 podman rmi $REMOTE_TAG
 
