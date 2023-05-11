@@ -32,13 +32,5 @@ jobs:
       - name: Send notification on success
         if: success()
         run: |
-          MESSAGE=":white_check_mark: Build succeeded on branch \`$GITHUB_REF\` by \`$GITHUB_USER\`"
-          echo "$MESSAGE" | tee /dev/tty | mail -s "$MESSAGE" 1159348642@qq.com
-
-      - name: Send notification on failure
-        if: failure()
-        run: |
-          MESSAGE=":x: Build failed on branch \`$GITHUB_REF\` by \`$GITHUB_USER\`"
-          ERROR="$(tail -n 1 /home/runner/work/my_todolist/my_todolist/npm-debug.log)"
-          echo "$MESSAGE\n\n$ERROR" | tee /dev/tty | mail -s "$MESSAGE" 1159348642@qq.com
+          read -p "success"
 
