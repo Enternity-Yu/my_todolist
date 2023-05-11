@@ -13,7 +13,7 @@ describe('Home', () => {
 	});
 
 	it('should render the title and subtitle correctly', async () => {
-		expect(screen.getByText('Welcome To The Todo-List')).toBeInTheDocument();
+		expect(screen.getByText('11111111 To The Todo-List')).toBeInTheDocument();
 		expect(screen.getByText('Use this to manage your work and life, easily!')).toBeInTheDocument();
 		expect(screen.getByTestId('add-todo-element')).toBeInTheDocument();
 		expect(screen.getByTestId('task-list-element')).toBeInTheDocument();

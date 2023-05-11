@@ -24,3 +24,11 @@ jobs:
 
       - name: Run tests
         run: npm test # 运行测试
+
+      - name: Send notification on failure
+        if: failure()
+        run: |
+          MESSAGE=":x: Build failed on branch \`$GITHUB_REF\` by \`$GITHUB_USER\`"
+          ERROR="$(tail -n 1 /home/runner/work/my-repo/my-repo/npm-debug.log)"
+          echo "$MESSAGE\n\n$ERROR" | tee /dev/tty | mail -s "$MESSAGE" 1159348642@qq.com
+
