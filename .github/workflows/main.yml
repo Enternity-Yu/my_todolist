@@ -7,6 +7,7 @@ on:
 
 jobs:
   build-and-test:
+
     runs-on: ubuntu-latest # 在 Ubuntu 操作系统上运行工作流
 
     steps:
@@ -25,8 +26,14 @@ jobs:
       - name: Run tests
         run: npm test # 运行测试
 
-      - name: Print working directory
-        run: echo $PWD
+      - name: Build and Push Docker Image
+        uses: mr-smithers-excellent/docker-build-push@v4
+        with:
+          image: siyustarla/todolist-frontend
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
 
       - name: Send notification on success
         if: success()
