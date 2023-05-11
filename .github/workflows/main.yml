@@ -28,9 +28,7 @@ jobs:
       - name: Print working directory
         run: echo $PWD
 
-
       - name: Send notification on success
         if: success()
-        run: |
-          read -p "success"
+        run: echo "success"
 
