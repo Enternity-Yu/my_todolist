@@ -27,7 +27,7 @@ jobs:
         run: npm test # 运行测试
 
       - name: Build and Push Docker Image
-        run: ../../ci/gen-image.sh
+        run: $GITHUB_WORKSPACE/ci/gen-image.sh
       #        uses: mr-smithers-excellent/docker-build-push@v4
       #        with:
       #          image: siyustarla/todolist-frontend
