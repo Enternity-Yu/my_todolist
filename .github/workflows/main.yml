@@ -27,10 +27,12 @@ jobs:
         run: npm test # 运行测试
 
       - name: Build and Push Docker Image
-        run: $GITHUB_WORKSPACE/ci/gen-image.sh
+        run: |
+          chmod +x $GITHUB_WORKSPACE/ci/gen-image.sh
+          $GITHUB_WORKSPACE/ci/gen-image.sh
       #        uses: mr-smithers-excellent/docker-build-push@v4
       #        with:
-      #          image: siyustarla/todolist-frontend
+      #          image: siyustarla/todolist-frontend:$(date +%Y-%m-%d-%H-%M-%S)
       #          registry: docker.io
       #          username: ${{ secrets.DOCKER_USERNAME }}
       #          password: ${{ secrets.DOCKER_PASSWORD }}
