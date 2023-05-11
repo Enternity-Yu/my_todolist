@@ -8,8 +8,8 @@ password=$2
 #REMOTE_TAG=$ECR_HOST/$LOCAL_TAG
 
 timestamp=$(date +%s)
-LOCAL_TAG = todolist-frontend:$timestamp
-REMOTE_TAG = $username/$LOCAL_TAG
+LOCAL_TAG=todolist-frontend:$timestamp
+REMOTE_TAG=$username/$LOCAL_TAG
 
 
 #podman login -u $username -p $password $endpoint
