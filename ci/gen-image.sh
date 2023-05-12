@@ -4,24 +4,13 @@ set +x
 username=$1
 password=$2
 
-#LOCAL_TAG=twuc-$TEAM:$SERVICE-$BUILD_NUMBER
-#REMOTE_TAG=$ECR_HOST/$LOCAL_TAG
-
-echo $username
 timestamp=$(date +%s)
 LOCAL_TAG=todolist-frontend:$timestamp
-REMOTE_TAG=siyustarla/$LOCAL_TAG
-echo $REMOTE_TAG
-
-
-#podman login -u $username -p $password $endpoint
-#
-#podman build -t LOCAL_TAG -f ../Dockerfile .
-#podman push $REMOTE_TAG
-#podman rmi $REMOTE_TAG
+REMOTE_TAG=$username/$LOCAL_TAG
 
 podman login -u "$username" -p "$password"
-podman build -t "$REMOTE_TAG" -f Dockerfile .
+podman build -t "$LOCAL_TAG" -f Dockerfile .
+podman tag "$LOCAL_TAG" "$REMOTE_TAG"
 podman push "$REMOTE_TAG"
 podman rmi "$REMOTE_TAG"
 
