@@ -10,6 +10,7 @@ password=$2
 timestamp=$(date +%s)
 LOCAL_TAG=todolist-frontend:$timestamp
 REMOTE_TAG=$username/$LOCAL_TAG
+echo $REMOTE_TAG
 
 
 #podman login -u $username -p $password $endpoint
@@ -18,8 +19,8 @@ REMOTE_TAG=$username/$LOCAL_TAG
 #podman push $REMOTE_TAG
 #podman rmi $REMOTE_TAG
 
-podman login -u $username -p $password
-podman build -t $REMOTE_TAG  -f ../Dockerfile .
-podman push $REMOTE_TAG
-podman rmi $REMOTE_TAG
+podman login -u "$username" -p "$password"
+podman build -t "$REMOTE_TAG"  -f ../../Dockerfile .
+podman push "$REMOTE_TAG"
+podman rmi "$REMOTE_TAG"
 
